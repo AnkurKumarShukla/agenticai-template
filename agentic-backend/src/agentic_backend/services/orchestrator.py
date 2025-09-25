@@ -7,6 +7,7 @@ from ..agents.finance import financial_agent_node
 from ..agents.websearch import websearch_agent_node
 from ..agents.news_sentiment import news_sentiment_agent_node
 from ..services.persistence import save_state
+from ..agents.trade_executor import trade_executor_agent_node
 
 # Build the graph once (synchronous graph)
 _graph = None
@@ -15,9 +16,9 @@ from graphviz import Digraph
 
 from graphviz import Digraph
 
-from IPython.display import Image, display
-import tempfile
-from graphviz import Digraph
+# from IPython.display import Image, display
+# import tempfile
+# from graphviz import Digraph
 
 
 
@@ -32,6 +33,8 @@ def router(state: SupervisorState):
         return "websearch_agent"
     if sel in ("sentiment_agent", "news_sentiment_agent", "sentimentagent", "newsentiment"):
         return "sentiment_agent"
+    if sel in ("trade_executor_agent", "tradeexecutoragent", "trade_executor", "tradeexecutor"):
+        return "trade_executor_agent"
     return "END"
 def build_graph():
     global _graph, _app
@@ -42,14 +45,16 @@ def build_graph():
         g.add_node("finance_agent", financial_agent_node)
         g.add_node("websearch_agent", websearch_agent_node)
         g.add_node("sentiment_agent", news_sentiment_agent_node)
+        g.add_node("trade_executor_agent", trade_executor_agent_node)
         g.set_entry_point("supervisor")
         # map routing labels to node names
-        g.add_conditional_edges("supervisor", router, {"finance_agent": "finance_agent", "websearch_agent": "websearch_agent","sentiment_agent":"sentiment_agent" ,"END": END})
+        g.add_conditional_edges("supervisor", router, {"finance_agent": "finance_agent", "websearch_agent": "websearch_agent","sentiment_agent":"sentiment_agent" ,"trade_executor_agent":"trade_executor_agent","END": END})
 
         # each agent returns to supervisor
         g.add_edge("finance_agent", "supervisor")
         g.add_edge("websearch_agent", "supervisor")
         g.add_edge("sentiment_agent", "supervisor")
+        g.add_edge("trade_executor_agent", "supervisor")
 
         _graph = g
         

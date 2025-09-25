@@ -1,3 +1,4 @@
+# python3.11
 fastapi==0.116.1
 uvicorn==0.35.0
 langchain==0.3.27
@@ -15,3 +16,4 @@ pydantic==2.11.7
 fastmcp
 langchain-mcp-adapters
 langgraph
+graphviz

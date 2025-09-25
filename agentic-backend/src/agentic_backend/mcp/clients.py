@@ -28,16 +28,16 @@ async def init_clients():
     )
     web_search_tools = await web_search_mcp_client.get_tools()
 
-    # rag_mcp_client = MultiServerMCPClient(
-    #     {
-    #         "RAG Server": {
-    #             "command": "python",
-    #             "args": [os.path.join(SERVERS_DIR, "rag_mcp.py")],
-    #             "transport": "stdio",
-    #         }
-    #     }
-    # )
-    # rag_tools = await rag_mcp_client.get_tools()
+    trade_exe_mcp_client = MultiServerMCPClient(
+        {
+            "RAG Server": {
+                "command": "python",
+                "args": [os.path.join(SERVERS_DIR, "trade_executor.py")],
+                "transport": "stdio",
+            }
+        }
+    )
+    trade_exe_tools = await trade_exe_mcp_client.get_tools()
 
     news_sentiment_client = MultiServerMCPClient(
         {
@@ -53,6 +53,6 @@ async def init_clients():
     return {
         "financial_tools": financial_tools,
         "web_search_tools": web_search_tools,
-        # "rag_tools": rag_tools,
+        "trade_exe_tools": trade_exe_tools,
         "sentiment_tools": sentiment_tools,
     }

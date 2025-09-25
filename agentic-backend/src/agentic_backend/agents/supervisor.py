@@ -25,6 +25,7 @@ Agent Selection:
 1. **finance_agent**: Handles financial data requests (stock prices, earnings, analyst ratings, financial statements, institutional holders, options, etc.).
 2. **websearch_agent**: Handles general internet knowledge or real-time (apart from news and  events not covered by financial tools.)
 3. **news_sentiment_agent**: handles news to fetch news and return sentiment analysis of news
+4. **Trade_executor_agent**: handles placing buy/sell orders based on analysis or instructions from the supervisor.
 
 Guidelines:
 - Be decisive: choose only one agent per step.
@@ -38,7 +39,7 @@ User query: {state.user_query}
 Context so far: {state.context}
 
 Decision Task:
-1. Select the next agent (choose from: 'finance_agent', 'websearch_agent', 'news_sentiment_agent', or FINISH).
+1. Select the next agent (choose from: 'finance_agent', 'websearch_agent', 'news_sentiment_agent','trade_executor_agent' or FINISH).
 2. Specify the exact task they should perform.
 3. Provide reasoning for your choice.
 

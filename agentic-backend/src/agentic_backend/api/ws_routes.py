@@ -65,7 +65,7 @@ async def chat_endpoint(websocket: WebSocket):
 
 
 @router.post("/chat")
-async def chat_endpoint(payload: dict):
+async def chat_endpointSS(payload: dict):
     
     state = None
     print("payload:", payload)
@@ -104,6 +104,6 @@ async def chat_endpoint(payload: dict):
 
 
 
-@router.get("/health")
+@router.get("/")
 async def health_check():
     return {"status": "ok"}
